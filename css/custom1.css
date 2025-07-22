@@ -1,0 +1,306 @@
+@charset "utf-8";
+/* CSS Document for UKY Production  */
+
+/* Move facets to Left side 
+
+prm-search > .layout-row {
+    display: -webkit-flex; !* Safari *!
+    -webkit-flex-flow: row-reverse wrap; !* Safari 6.1+ *!
+    display: flex;
+    flex-flow: row-reverse wrap;
+}
+.flex-gt-md-25.sidebar{
+    webkit-flex: 0 0 15%;
+    flex: 0 0 15%;
+}
+.main{
+    webkit-flex: 0 0 65%;
+    flex: 0 0 65%;
+}
+.layout-row>.flex-gt-lg-10{
+    webkit-flex: 0 0 16%;
+    flex: 0 0 16%;
+    max-width: none;
+}
+*/
+prm-topbar .isDeposit, prm-topbar .isServicePage, prm-topbar .isSummonOverAlma {
+    display: inline;
+}   
+/*Make Clickable Logo CSS */
+
+/* Call the clickable logo */
+prm-logo div.product-logo {
+    display:none;
+}
+prm-logo div.product-logo-local {
+    display: flex;
+}
+prm-logo .logo-image, prm-logo img {
+    max-height: 130%;
+}
+
+/*Replace the Magnifying Glass 
+#magnifying-glass {display:none}
+.search-actions button[aria-label="Search"] {
+  background-image:url("http://opensourceconnections.com/images/search-disco-logo-sq-sm-2.png");​
+  background-size: 70px
+}
+
+*/
+
+  * Header
+  */
+ 
+ /* background-color */
+ .prm-primary-bg, prm-browse-search-bar, prm-journals-search-bar, prm-search-bar, prm-spinner.overlay-cover.light-on-dark:after, prm-tags-search-bar {
+    color: #fff;
+    background-color: #143887;
+ }
+ 
+ .prm-primary-bg.prm-hue1, prm-spinner.prm-hue1.overlay-cover.light-on-dark:after, prm-topbar .top-nav-bar, prm-search-bar.prm-hue1 {
+      background-color: #202C5F;
+ }
+ 
+ /*
+  * Top menu text and icons
+  * <prm-icon icon-type="svg" svg-icon-set="primo-ui" 
+ icon-definition="dots-horizontal">
+  *
+  * This rule set changes the color of the top menu text and icons.
+  * RESULT:  Top menu background-color is #202C5F (UK dark blue).
+  *          Color of Top Menu text and icons is #FFFFFF (White).
+  */
+ .hoverable-over-dark, prm-main-menu[menu-type="full"] 
+ .md-button:hover, prm-main-menu[menu-type="full"] .md-button:focus, 
+ prm-main-menu[menu-type="full"] .md-button.md-focused, 
+ prm-main-menu[menu-type="full"] .md-button md-select:focus, 
+ prm-main-menu[menu-type="full"] .md-button .md-input-container-dummy > 
+ .md-select-dummy:focus, prm-main-menu[menu-type="full"] 
+ .overlay-menu-item:hover, prm-main-menu[menu-type="full"] 
+ .overlay-menu-item:focus, prm-main-menu[menu-type="full"] 
+ .overlay-menu-item.md-focused, prm-main-menu[menu-type="full"] 
+ .overlay-menu-item md-select:focus, prm-main-menu[menu-type="full"] 
+ .overlay-menu-item .md-input-container-dummy > .md-select-dummy:focus, 
+ prm-main-menu[menu-type="full"] md-card:hover, 
+ prm-main-menu[menu-type="full"] md-card:focus, prm-user-area 
+ md-fab-toolbar .md-fab-action-item .md-button, prm-user-area 
+ md-fab-toolbar ._md-fab-action-item .md-button, prm-user-area 
+ md-fab-toolbar .md-fab-action-item md-input-container, prm-user-area 
+ md-fab-toolbar._md-fab-action-item md-input-container, .md-button.button-over-dark, prm-user-area .md-button.user-menu-button, prm-topbar .md-button {
+     color: #FFFFFF;
+ }
+ 
+
+ 
+ /* Search Bar background-color */
+ .prm-primary-bg, prm-browse-search-bar, prm-atoz-search-bar, prm-journals-search-bar, prm-search-bar, prm-spinner.overlay-cover.light-on-dark:after, prm-search-bar {
+     background-color: #143887;
+ }
+
+ /*   hue3 section of color rules */
+.prm-primary-bg.prm-hue3-important,prm-browse-search-bar.prm-hue3-important,prm-journals-search-bar.prm-hue3-important,prm-search-bar.prm-hue3-important,prm-spinner.prm-hue3-important.overlay-cover.light-on-dark:after,prm-tags-search-bar.prm-hue3-important,prm-user-area md-fab-toolbar.md-is-open md-fab-trigger ._md-fab-toolbar-background,prm-user-area md-fab-toolbar.md-is-open md-fab-trigger .md-fab-toolbar-background {
+    background-color: #202C5F !important
+}
+
+/* Disable Language choice  */
+prm-change-lang {
+   display: none;
+}
+
+
+/* Start Daniel's customizations */
+
+/* bigger top menu labels */
+prm-main-menu[menu-type="menu"] .md-button {
+  padding: 0 0.5em;
+  max-width: 12em;
+  font-size: .85em; }
+
+/* bigger tooltip */
+.item-description.popover.animate-popover {
+  font-size: 1.3em;  
+}
+
+/* stuff related to search box logo */
+/* adapted from style posted on Primo listserv by Yongli Zhou */
+@media (max-width: 970px) {
+    .primo-search-logo {
+        display: none;
+    }
+}
+@media (min-width: 970px) {
+    .search-wrapper {
+        margin-left: 25%;
+    }
+    .search-wrapper .flex-lg-10 {
+        display: none;
+    }
+    .search-wrapper .flex-lg-65 {
+        max-width: 66%;
+    }
+    .primo-search-logo {
+        display: block;
+        width: 25%;
+        text-align: right;
+        top: 25px;  
+        position: absolute;
+        padding-right: 25px;
+    }
+    .primo-search-logo img {
+        width: 90%;
+        max-width: 126px;
+    }
+    .primo-browse-logo {
+        display: block;
+        width: 20%;
+        text-align: right;
+        top: 25px;  
+        position: absolute;
+        padding-right: 25px;
+    }
+    .primo-browse-logo img {
+        width: 90%;
+        max-width: 126px;
+    }
+}
+
+.advanced-search-backdrop {
+        background-color: #143887;
+
+}
+
+/* End Daniel's customizations */
+
+/* Begin maps style */
+
+.ic-map-img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid black;
+    box-shadow: 7px 7px 7px blue;
+}
+
+.ic-loc-message{
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5em;
+    font-weight: 600;
+    color: #44707b;
+    margin-block-end: 1em;
+    padding-inline-start: 45px;
+
+}
+
+/* End maps style */
+
+/* Begin Aeon Stuff */
+.aeonhelp {
+  font-size: .8em;
+  font-style: italic;
+  margin-left: 5.25px;
+
+}
+
+.helpaeon {
+  font-size: .8em;
+  font-style: italic;
+  margin-left: 5.25px; 
+}
+
+.aeonicon {
+  height: 15px;
+  margin-right: 5.25px;
+}
+
+#aeoninline {
+  height: 15px;
+  margin-right: 5.25px;
+  margin-left: 5.25px;
+}
+
+/* End Aeon Stuff */
+#newsbox {
+    width: 600;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size: 1.2em;
+
+}
+/* News Box stuff */
+
+/* Hathi stuff */
+
+/* primary color hook end*/
+span.umnHathiTrustLink {
+  margin-left: -5px;
+}
+
+span.umnHathiTrustLink md-icon svg {
+  height: 1.2em;
+  filter: grayscale(100%);
+}
+
+span.umnHathiTrustLink:hover md-icon svg {
+  filter: grayscale(0%);
+}
+
+        #feedbackLabel {
+            top: 30%;
+            transform-origin: left top;
+            transform: rotate(90deg);
+            width: 140px;
+            text-align: center;
+            position: fixed;
+            z-index: 1000;
+            display: block;
+            background-color: #B1C9E8;
+            padding: 10px;
+            border: 2px solid black;
+            }
+            
+        #feedbackContainer{
+            top: 30%;
+            transform-origin: left top;
+            border: 2px solid black;
+            height: 400px;
+            width: 400px;
+            text-align: left;
+            right: -410px;
+            margin-right: 0px;
+            position: fixed;
+            z-index: 1000;
+            display: block;
+            background-color: #B1C9E8;
+            padding: 0px;
+            font-size: 16px;
+            font-family: Arial;
+            }
+        #feedbackContent {
+            padding: 20px;
+        }
+
+#advScopeNote {
+    background-color: rgb(243,243,243);
+    border-color: rgb(243, 243, 243);
+    padding:  15px;
+    text-align: center;
+}
+
+#scopeNoteBox {
+    text-align: center;
+    color: white;
+    padding: 10px;
+}
+
+/* Remove book/journal option in Purchase Request form */
+prm-request #form_field_citationType {
+    display: none;
+}
+
+.gobiDda {
+    font-size: 1em;
+    color: #44707b;
+}
