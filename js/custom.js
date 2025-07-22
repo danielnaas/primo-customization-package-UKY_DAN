@@ -153,7 +153,7 @@ angular.module('requestTweaks', []).component('prmRequestAfter', {
   app.component('prmSearchResultAvailabilityLineAfter', {
     bindings: { parentCtrl: '<' },
     controller: 'prmSearchResultAvailabilityLineAfterController',
-    template: '<span class="gobiDda"><div ng-if="$ctrl.gobiMessageCheck"><a href="http://saalck-uky.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma99321741502636&context=L&vid=01SAA_UKY:UKY&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&tab=Everything&query=any%2Ccontains%2Cstatistics%20explained&offset=0" ng-click="$ctrl.handleLogin()">👋 Let us buy this for you.</a><a href="" ng-click="$ctrl.handleAvailability($index, $event);$event.preventDefault();"><span id="gobiText">Please sign in and submit a purchase request.</span></a></div></span></span>'
+    template: '<gobi-message></gobi-message>'
 });
 
 app.controller('prmSearchResultAvailabilityLineAfterController', function ($scope) {
@@ -180,35 +180,60 @@ app.controller('prmSearchResultAvailabilityLineAfterController', function ($scop
     };
   });
 
-   // Remove the ILL link for GobiDDA items
-  angular.module('gobiDda', []).component('almaHowovpAfter', {
+///////////////////////////////////////////////////////////
+// Here is all the GOBI DDA stuff  
+angular.module('gobiDda', []).component('gobiMessage', {
+  bindings: { parentCtrl: '<' },
+  template: '<div ng-if="$ctrl.gobiMessageCheck"><a href="">👋 Let us buy this for you.  Please sign in and submit a purchase request.</a></div>',
+  controller: function controller($scope) {
+  // this part checks for a specific lds that I mapped MARC 909 to (36 in production, 21 in sandbox)
+    this.$onInit = function () {
+      {
+        console.log("CONTROLLER: gobiMessage controller triggered");
+        this.gobiMessageCheck = false;
+        //console.log("SCOPE: ");
+        //console.log($scope);
+        const display = $scope.$parent.$ctrl.parentCtrl.result.pnx.display;
+        //console.log(display);
+        let gobiLds = "";
+        if(display.lds36) {  
+          //console.log("UNDEFINED TEST: VALUE EXISTS");
+          gobiLds = display.lds36[0];
+        } else {
+          //console.log("UNDEFINED TEST: VALUE DOES NOT EXIST");
+        }
+        //console.log("checking lds21");
+        //console.log(lds21);
+        if(gobiLds == "GOBI on-demand") {
+          this.gobiMessageCheck = true;
+          console.log("RESULT: GOBI DDA item found");
+        }
+        //console.log("CHECKING gobiMessageCheck: " + this.gobiMessageCheck);
+      }
+    };
+  }}).component('almaHowovpAfter', {
     bindings: {
       parentCtrl: '<',
     },
     controller: function controller($document, $scope) {
       this.$onInit = function () {
-        console.log("Find the PNX");
-        // ctrl.parentCtrl.item.pnx.display.lds36 == "GOBI on-demand"
-        console.log($scope);
-        let pnxlds36 = "";
+        console.log("CONTROLLER: almaHowovpAfter controller triggered");
+        //console.log($scope);
+        let gobiLds = "";
         try {
-          console.log("CHECKING LDS36: " + $scope.$ctrl.parentCtrl.item.pnx.display.lds36)
-          pnxlds36 = $scope.$ctrl.parentCtrl.item.pnx.display.lds36;
-          console.log("HERE IT IS:" + pnxlds36);
+          // lds21 in sandbox, lds 36 in production
+          gobiLds = $scope.$ctrl.parentCtrl.item.pnx.display.lds36;
         } catch(e) {
-          // let pnxlds36 = [];
-          pnxlds36 = "";
-          console.log("HERE IT ISN'T:" + pnxlds36);
         }
         let gobiCheck = false;
-        if (pnxlds36 == "GOBI on-demand") {
+        if (gobiLds == "GOBI on-demand") {
           gobiCheck = true;
-          console.log("GOBI check is true");
+          console.log("RESULT: GOBI DDA item found, removing ILL");
         }
         if (gobiCheck) {
           this.$doCheck = function () {
               let almaOvp = $document[0].querySelectorAll('alma-howovp > div');
-              console.log(almaOvp);
+              //console.log(almaOvp);
               if(almaOvp[1]) {
                 almaOvp[1].style.display = "none";
               } 
